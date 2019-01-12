@@ -1,4 +1,3 @@
-const path = require("path");
 const homes = require("../helpers/homes.js");
 
 const routeHandlers = {
@@ -13,7 +12,6 @@ const routeHandlers = {
     });
   },
   alternateRoute: (req, res) => {
-    // res.render("landing");
     res.sendStatus(404);
   }
 };

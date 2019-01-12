@@ -10,7 +10,7 @@ const homes = {
 
   createUrls: listings => {
     return listings.map(
-      id => `https://s3.amazonaws.com/hrnyc19apartmentimages/Images/${id}.jpg`
+      id => `https://s3.amazonaws.com/hrnyc19apartmentimages/Images/${id}`
     );
   },
 

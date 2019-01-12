@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const db = require("./index.js");
 
 const homeSchema = new mongoose.Schema({
+  _id: {type: Number, unique: true},
   city: { type: String },
   address: { type: String, unique: true },
   price: { type: Number },

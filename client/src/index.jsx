@@ -17,5 +17,5 @@ ReactDOM.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
-  document.getElementById("similar")
+  document.getElementById("similar-container")
 );

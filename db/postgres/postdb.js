@@ -1,39 +1,48 @@
+var client = require('./homeModel.js')
 const faker = require("faker");
 const Home = require("./homeModel.js");
 const fs = require("file-system");
 
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const csvWriter = createCsvWriter({
+    path: './file.csv',
+    header: [
+        {id: 'city', title: 'CITY'},
+        {id: 'address', title: 'ADDRESS'},
+        {id: 'price', title: 'PRICE'},
+        {id: 'bedNum', title: 'BEDNUM'},
+        {id: 'bathNum', title: 'BATHNUM'},
+        {id: 'sqFootage', title: 'sqFOOTAGE'},
+        {id: 'imageUrl', title: 'IMAGEURL'}
+
+    ]
+});
+
+
+
 var batch = [];
 var start = 1;
-var end = 10000;
+var end = 10;
 var insertAllHomes = () => {
-
-  Home.insertMany(batch, {ordered: false}, (err, data) => {
-    if(err) {
-      console.log(err)
-    } else if (start <= end) {
-      start++;
-      batch = [];
-      makeBatch();
-      
-    } else {
-      console.timeEnd('dbinsert')
-    }
-  })
-};
-
-makeBatch = () => {
   var cities = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"];
-  for (var i = 1; i <= 1000; i++) {
+  for (var i = 1; i <= 1000000; i++) {
     var home = generateHomeAttributes({}, (i), cities);
-   
-    
-    batch.push(home);
-    
+    batch.push(home)
   }
-  // console.log('batchlength', batch.length)
-  insertAllHomes();
-};
+  writeBatch()
+}
 
+var writeBatch = () => {
+  csvWriter.writeRecords(batch)
+    .then(() => {
+      batch = [];
+      console.log('batch in csv file')
+      if(start <= end) {
+        start++;
+        insertAllHomes();
+      }
+    })
+}
 
 var generateHomeAttributes = (home, id, cities) => {
   if (id < 25) {
@@ -94,7 +103,7 @@ var decorateBallerTier = (home, id, cities) => {
 var getRandomNumber = function(min, max) {
   return Math.floor(Math.random() * (max + 1 - min)) + min;
 };
-console.time('dbinsert')
+// console.time('dbinsert')
 insertAllHomes();
 
 

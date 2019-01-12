@@ -1,9 +1,11 @@
 const express = require("express");
 const router = require("./routes.js");
+const compress = require("compression");
 const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 
+app.use(compress());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
