@@ -5,7 +5,7 @@ const fs = require("file-system");
 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
-    path: './file.csv',
+    path: '/Library/PostgreSQL/11/data/file.csv',
     header: [
         {id: 'city', title: 'CITY'},
         {id: 'address', title: 'ADDRESS'},
@@ -22,10 +22,10 @@ const csvWriter = createCsvWriter({
 
 var batch = [];
 var start = 1;
-var end = 10;
+var end = 1000;
 var insertAllHomes = () => {
   var cities = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"];
-  for (var i = 1; i <= 1000000; i++) {
+  for (var i = 1; i <= 10000; i++) {
     var home = generateHomeAttributes({}, (i), cities);
     batch.push(home)
   }
@@ -35,11 +35,13 @@ var insertAllHomes = () => {
 var writeBatch = () => {
   csvWriter.writeRecords(batch)
     .then(() => {
+      start++;
       batch = [];
-      console.log('batch in csv file')
       if(start <= end) {
-        start++;
         insertAllHomes();
+      }
+      if(start > end) {
+        require('./insertPostgres.js')
       }
     })
 }
@@ -103,7 +105,7 @@ var decorateBallerTier = (home, id, cities) => {
 var getRandomNumber = function(min, max) {
   return Math.floor(Math.random() * (max + 1 - min)) + min;
 };
-// console.time('dbinsert')
+console.time('dbinsert')
 insertAllHomes();
 
 

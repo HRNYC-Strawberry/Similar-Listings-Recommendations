@@ -1,5 +1,5 @@
 var client = require('./homeModel.js')
-let query = 'CREATE TABLE homes(' +
+let query = 'drop table if exists homes; CREATE TABLE homes(' +
  'city VARCHAR(40), address VARCHAR(40) ,' +
  'price INTEGER, bedNum INTEGER, bathNum INTEGER,' + 
  'sqFootage INTEGER, imageURL VARCHAR(300) );'
@@ -8,9 +8,9 @@ let query = 'CREATE TABLE homes(' +
    if(err) {
      console.error(err)
    } else {
-    let seed = `COPY homes FROM 'file.csv' CSV HEADER`;
+    let seed = `COPY homes FROM '/Library/PostgreSQL/11/data/file.csv' CSV HEADER;`;
     client.query(seed, (er, resp) => {
-      console.log(er, resp);
+      console.timeEnd('dbinsert')
     });
    }
  })
