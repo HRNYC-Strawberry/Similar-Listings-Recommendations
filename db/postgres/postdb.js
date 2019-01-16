@@ -7,6 +7,7 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
     path: '/Library/PostgreSQL/11/data/file.csv',
     header: [
+        {id: 'home_id', title: 'HOME_ID'},
         {id: 'city', title: 'CITY'},
         {id: 'address', title: 'ADDRESS'},
         {id: 'price', title: 'PRICE'},
@@ -23,10 +24,13 @@ const csvWriter = createCsvWriter({
 var batch = [];
 var start = 1;
 var end = 1000;
+var global_ID = 0;
 var insertAllHomes = () => {
   var cities = ["Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"];
   for (var i = 1; i <= 10000; i++) {
     var home = generateHomeAttributes({}, (i), cities);
+    home.home_id = global_ID;
+    global_ID++;
     batch.push(home)
   }
   writeBatch()
