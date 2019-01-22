@@ -8,9 +8,9 @@ let query = 'drop table if exists homes; CREATE TABLE homes(' +
    if(err) {
      console.error(err)
    } else {
-    let seed = `COPY homes (home_id, city, address, price, bedNum, bathNum, sqFootage, imageURL) FROM '/Library/PostgreSQL/11/data/file.csv' CSV HEADER;`;
+    let seed = `COPY homes (home_id, city, address, price, bedNum, bathNum, sqFootage, imageURL) FROM '/Users/hannapark/Documents/hrnyc19/Similar-Listings-Recommendations/db/postgres/file.csv' CSV HEADER;`;
     client.query(seed, (er, resp) => {
-      console.timeEnd('dbinsert')
+      // console.timeEnd('dbinsert')
     });
    }
  })

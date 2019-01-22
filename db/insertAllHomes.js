@@ -30,7 +30,6 @@ makeBatch = () => {
     batch.push(home);
     
   }
-  // console.log('batchlength', batch.length)
   insertAllHomes();
 };
 

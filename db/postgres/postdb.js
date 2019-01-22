@@ -5,16 +5,16 @@ const fs = require("file-system");
 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
-    path: '/Library/PostgreSQL/11/data/file.csv',
+    path: '/Users/hannapark/Documents/hrnyc19/Similar-Listings-Recommendations/db/postgres/file.csv',
     header: [
-        {id: 'home_id', title: 'HOME_ID'},
-        {id: 'city', title: 'CITY'},
-        {id: 'address', title: 'ADDRESS'},
-        {id: 'price', title: 'PRICE'},
-        {id: 'bedNum', title: 'BEDNUM'},
-        {id: 'bathNum', title: 'BATHNUM'},
-        {id: 'sqFootage', title: 'sqFOOTAGE'},
-        {id: 'imageUrl', title: 'IMAGEURL'}
+        {id: 'home_id', title: 'home_id'},
+        {id: 'city', title: 'city'},
+        {id: 'address', title: 'address'},
+        {id: 'price', title: 'price'},
+        {id: 'bedNum', title: 'bedNum'},
+        {id: 'bathNum', title: 'bathNum'},
+        {id: 'sqFootage', title: 'sqFootage'},
+        {id: 'imageUrl', title: 'imageURL'}
 
     ]
 });
@@ -109,7 +109,7 @@ var decorateBallerTier = (home, id, cities) => {
 var getRandomNumber = function(min, max) {
   return Math.floor(Math.random() * (max + 1 - min)) + min;
 };
-console.time('dbinsert')
+// console.time('dbinsert')
 insertAllHomes();
 
 

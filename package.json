@@ -4,6 +4,8 @@
   "description": "This is a simple monolithic application for a recommendation component.",
   "main": "index.js",
   "scripts": {
+    "prestart": "webpack -p",
+    "start": "node ./server/index.js",
     "dev": "concurrently --kill-others \"npm run react-dev\" \"npm run server-dev\"",
     "react-dev": "webpack -p --watch",
     "server-dev": "nodemon ./server/index.js",

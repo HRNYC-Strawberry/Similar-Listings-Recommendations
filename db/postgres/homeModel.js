@@ -1,8 +1,18 @@
 var pg = require('pg');
-var conString = 'postgres://postgres:asdf;lkj@localhost:5432/streetbreezy';
+var URI = "ec2-52-15-160-78.us-east-2.compute.amazonaws.com" || localhost;
+var password = process.env.DATABASE_PASSWORD || '';
 
-var client = new pg.Client(conString);
+var client = new pg.Pool({
+  host: 'ec2-52-15-160-78.us-east-2.compute.amazonaws.com',
+  user: 'postgres',
+  password: "mysecretpassword",
+  database: 'streetbreezy',
+  port: 80
+})
+// var client = new pg.Client(conString);
 client.connect();
+
+
 
 
 
