@@ -1,11 +1,12 @@
-var client = require('./homeModel.js')
+// var client = require('./homeModel.js')
 const faker = require("faker");
-const Home = require("./homeModel.js");
-const fs = require("file-system");
+// const Home = require("./homeModel.js");
+// const fs = require("file-system");
 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
-    path: '/Users/hannapark/Documents/hrnyc19/Similar-Listings-Recommendations/db/postgres/file.csv',
+    path: '/home/ubuntu/file.csv',
+    // path: 'var/lib/PostgreSQL/9.5/main/file.csv',
     header: [
         {id: 'home_id', title: 'home_id'},
         {id: 'city', title: 'city'},
